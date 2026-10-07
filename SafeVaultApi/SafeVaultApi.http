@@ -1,0 +1,45 @@
+@SafeVaultApi_HostAddress = http://localhost:5157
+@accessToken = replace-with-token-from-login-response
+
+### Register a user
+POST {{SafeVaultApi_HostAddress}}/api/users/register
+Content-Type: application/json
+
+{
+  "username": "harold.smith",
+  "email": "harold.smith@example.com",
+  "password": "Str0ng!Password"
+}
+
+###
+
+### Log in
+POST {{SafeVaultApi_HostAddress}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "harold.smith",
+  "password": "Str0ng!Password"
+}
+
+###
+
+### Get the authenticated user
+GET {{SafeVaultApi_HostAddress}}/api/users/me
+Authorization: Bearer {{accessToken}}
+
+###
+
+### Get the Admin dashboard
+GET {{SafeVaultApi_HostAddress}}/api/admin/dashboard
+Authorization: Bearer {{accessToken}}
+
+### Attempt duplicate registration
+POST {{SafeVaultApi_HostAddress}}/api/users/register
+Content-Type: application/json
+
+{
+  "username": "harold.smith",
+  "email": "other@example.com",
+  "password": "Str0ng!Password"
+}
